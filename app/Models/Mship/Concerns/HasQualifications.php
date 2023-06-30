@@ -6,7 +6,7 @@ use App\Events\Mship\AccountAltered;
 use App\Events\Mship\Qualifications\QualificationAdded;
 use App\Models\Mship\AccountQualification;
 use App\Models\Mship\Qualification;
-use Exception;
+use Illuminate\Support\Facades\Log;
 
 trait HasQualifications
 {
@@ -19,7 +19,8 @@ trait HasQualifications
             'qualification_id'
         )->orderBy('vatsim')
             ->using(AccountQualification::class)
-            ->wherePivot('deleted_at', '=', null)
+            ->withPivot('deleted_at', 'id')
+            ->wherePivotNull('deleted_at')
             ->withTimestamps();
     }
 
@@ -46,6 +47,23 @@ trait HasQualifications
             $this->qualifications()->attach($qualification);
             $this->touch();
             event(new QualificationAdded($this, $qualification));
+            event(new AccountAltered($this));
+        }
+
+        return $this;
+    }
+
+    public function removeQualification(Qualification $qualification)
+    {
+        if ($this->hasQualification($qualification)) {
+            Log::info("Removing qualification {$qualification->code} from member {$this->id}");
+
+            $memberQualificationPivot = $this->qualifications_pilot->where('code', $qualification->code)->first()->pivot;
+
+            $memberQualificationPivot->deleted_at = now();
+            $memberQualificationPivot->save();
+
+            $this->touch();
             event(new AccountAltered($this));
         }
 
@@ -102,7 +120,8 @@ trait HasQualifications
             ->merge($this->qualifications_pilot_training)
             ->merge($this->qualifications_admin)
             ->push($this->qualification_atc)
-            ->push($this->qualification_pilot);
+            ->push($this->qualification_pilot)
+            ->push($this->qualification_pilot_military);
     }
 
     public function getQualificationAtcAttribute()
@@ -135,10 +154,26 @@ trait HasQualifications
         });
     }
 
+    public function getQualificationsPilotMilitaryAttribute()
+    {
+        return $this->qualifications->filter(function ($qual) {
+            return $qual->type == 'pilot_military';
+        });
+    }
+
     public function getQualificationPilotAttribute()
     {
         return $this->qualifications->filter(function ($qual) {
             return $qual->type == 'pilot';
+        })->sortByDesc(function ($qualification) {
+            return $qualification->vatsim;
+        })->first();
+    }
+
+    public function getQualificationPilotMilitaryAttribute()
+    {
+        return $this->qualifications->filter(function ($qual) {
+            return $qual->type == 'pilot_military';
         })->sortByDesc(function ($qualification) {
             return $qualification->vatsim;
         })->first();

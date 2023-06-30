@@ -92,9 +92,26 @@ class Qualification extends Model
     {
         $ratingsOutput = [];
 
+        // -1 will be returned as the pilot rating before the user has completed the P0 exam
+        // should they log into our system before completing the exam.
+        if ($network == -1) {
+            return $ratingsOutput;
+        }
+
         // A P0 will not be picked up in the bitmap
         if ($network >= 0) {
             array_push($ratingsOutput, self::ofType('pilot')->networkValue(0)->first());
+        }
+
+        // if network is not an even bitmask number parse as a 'special' rating
+        // where only one rating would be assigned to the user.
+        if ($network % 2 !== 0) {
+            $ro = self::ofType('pilot')->networkValue($network)->first();
+            if ($ro) {
+                array_push($ratingsOutput, $ro);
+            }
+
+            return $ratingsOutput;
         }
 
         // Let's check each bitmask....
@@ -109,6 +126,11 @@ class Qualification extends Model
         }
 
         return $ratingsOutput;
+    }
+
+    public static function parseVatsimMilitaryPilotQualifications(int $bitmask): array
+    {
+        return self::ofType('pilot_military')->where('vatsim', '<=', $bitmask)->orderBy('vatsim')->get()->all();
     }
 
     public function __toString()
