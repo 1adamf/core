@@ -17,10 +17,6 @@ class FilamentAccessMiddleware
     {
         $account = $request->user();
 
-        if (! $account->can('admin.access')) {
-            return abort(403);
-        }
-
         return $next($request);
     }
 }
