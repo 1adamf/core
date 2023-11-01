@@ -12,14 +12,12 @@
     "hot": "mix watch --hot",
     "production": "mix --production",
     "prod": "yarn run production",
-    "build-waiting-lists-manager-prod": "cd nova-components/WaitingListsManager && yarn && yarn run prod",
-    "build-waiting-lists-manager": "cd nova-components/WaitingListsManager && yarn && yarn run dev",
-    "heroku-postbuild": "yarn run prod && yarn run build-waiting-lists-manager-prod"
+    "heroku-postbuild": "yarn run prod"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "admin-lte": "2.4.18",
-    "axios": "^1.5",
+    "axios": "^1.6",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.4.3",
     "bootstrap-tour": "^0.12.0",
@@ -34,9 +32,9 @@
     "popper.js": "^1.16",
     "postcss": "^8.4",
     "resolve-url-loader": "5.0.0",
-    "sass": "^1.69.3",
+    "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
-    "vue": "^2.7.14",
-    "vue-template-compiler": "^2.7.14"
+    "vue": "^2.7.15",
+    "vue-template-compiler": "^2.7.15"
   }
 }

@@ -27,6 +27,8 @@ class WaitingListAccountCtsTheoryTest extends TestCase
         $this->member = factory(Member::class)->create();
         $this->account = Account::factory()->create(['id' => $this->member->cid]);
         $this->account->addState(State::findByCode('DIVISION'));
+
+        $this->actingAs($this->privacc);
     }
 
     /** @test */
@@ -64,7 +66,7 @@ class WaitingListAccountCtsTheoryTest extends TestCase
     }
 
     /** @test */
-    public function itShouldReturnNullWhenPilotWaitingList()
+    public function itShouldReturnFalseWhenPilotWaitingList()
     {
         $waitingList = factory(WaitingList::class)->create([
             'cts_theory_exam_level' => null,
@@ -73,7 +75,7 @@ class WaitingListAccountCtsTheoryTest extends TestCase
 
         $waitingList->addToWaitingList($this->account, $this->privacc);
 
-        $this->assertNull($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
+        $this->assertFalse($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
     }
 
     /** @test */
@@ -85,7 +87,7 @@ class WaitingListAccountCtsTheoryTest extends TestCase
 
         $waitingList->addToWaitingList($this->account, $this->privacc);
 
-        $this->assertNull($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
+        $this->assertFalse($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
     }
 
     /** @test */
@@ -97,7 +99,7 @@ class WaitingListAccountCtsTheoryTest extends TestCase
 
         $waitingList->addToWaitingList($this->account, $this->privacc);
 
-        $this->assertNull($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
+        $this->assertFalse($waitingList->accounts->find($this->account->id)->pivot->theoryExamPassed);
     }
 
     /** @test */

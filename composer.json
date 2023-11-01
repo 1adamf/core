@@ -56,33 +56,25 @@
         {
             "type": "vcs",
             "url": "https://github.com/VATSIM-UK/public-id"
-        },
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "path",
-            "url": "nova-components/WaitingListsManager"
         }
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1.0",
         "alawrence/laravel-ipboard": "dev-main",
-        "axonc/filament-copyable-placeholder": "^0.1.0",
+        "axonc/filament-copyable-placeholder": "^0.3.0",
         "barryvdh/laravel-debugbar": "^3.3",
         "barryvdh/laravel-ide-helper": "^2.7",
         "bugsnag/bugsnag-laravel": "^2.0",
         "doctrine/dbal": "~3.3",
-        "filament/filament": "^2.0",
+        "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.19",
+        "laravel/framework": "^10.0",
         "laravel/helpers": "^1.1",
         "laravel/horizon": "^5.0",
         "laravel/passport": "^11.2",
         "laravel/telescope": "^4.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0",
+        "laravel/ui": "^4.0",
         "laravelcollective/html": "^6.0",
         "league/csv": "^8.0",
         "league/oauth2-client": "^2.4",
@@ -98,7 +90,6 @@
         "symfony/http-client": "^6.1",
         "symfony/mailgun-mailer": "^6.1",
         "symfony/translation": "^6.1",
-        "titasgailius/search-relations": "^2.0",
         "vatsim/sso": "3.0",
         "watson/rememberable": "^6.0",
         "whitecube/laravel-cookie-consent": "^1.0.1",
@@ -108,14 +99,15 @@
         "ext-json": "*",
         "codedungeon/phpunit-result-printer": "^0.32.0",
         "fakerphp/faker": "^1.9.1",
+        "filament/upgrade": "^3.0-stable",
         "laracasts/generators": "^2.0",
         "laravel/homestead": "^14.0.0",
         "laravel/legacy-factories": "^1.1",
         "laravel/pint": "^1.10",
         "mockery/mockery": "1.6.*",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^9.4",
-        "spatie/laravel-ignition": "^1.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.23",
         "symfony/css-selector": "^4.0",
         "symfony/dom-crawler": "^6.1",
@@ -153,7 +145,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover",
+            "@php artisan filament:upgrade"
         ],
         "ide-helper": [
             "php artisan ide-helper:generate",
