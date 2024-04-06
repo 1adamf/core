@@ -30,7 +30,7 @@
             @if($stands)
                 $('#stands').DataTable(
                     {
-                        "aaSorting": [], 
+                        "aaSorting": [],
                         "columnDefs": [
                             { targets: 'no-sort', orderable: false },
                             { targets: 'no-search', searchable: false}
@@ -267,7 +267,7 @@
                 <div class="panel panel-ukblue">
                     <div class="panel-heading"><i class="fa fa-map"></i> Charts</div>
                     <div class="text-summary panel-body">
-                        <iframe class="w-100" style="min-height:80vh;width:100%" src="https://chartfox.org/api/interface/charts/{{ $airport->icao }}?token={{ config('services.chartfox.public_token') }}"></iframe>
+                        <iframe class="w-100" style="min-height:80vh;width:100%" src="https://api.chartfox.org/v2/interfaces/airport/{{ $airport->icao }}?token={{ config('services.chartfox.public_token') }}"></iframe>
                     </div>
                 </div>
 
@@ -330,10 +330,10 @@
                 @endif
             </div>
         @endif
-        @if($airport->stations->count() > 0)
+        @if($airport->positions->count() > 0)
             <div class="col-md-6">
                 <div class="panel panel-ukblue">
-                    <div class="panel-heading"><i class="fa fa-wifi"></i> ATC Stations</div>
+                    <div class="panel-heading"><i class="fa fa-wifi"></i> ATC Positions</div>
                     <div class="panel-body table-responsive">
                         <table class="table">
                             <thead>
@@ -342,16 +342,16 @@
                             <th>Frequency</th>
                             </thead>
                             <tbody>
-                                @foreach($stations as $station)
+                                @foreach($positions as $positions)
                                     <tr>
-                                        <td>@if(!$station->sub_station)
-                                                <strong>{{$station->callsign}}</strong>
+                                        <td>@if(!$positions->sub_station)
+                                                <strong>{{$positions->callsign}}</strong>
                                             @else
-                                                {{$station->callsign}}
+                                                {{$positions->callsign}}
                                             @endif
                                         </td>
-                                        <td>{{$station->name}}</td>
-                                        <td>{{$station->frequency}}</td>
+                                        <td>{{$positions->name}}</td>
+                                        <td>{{$positions->frequency}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Http\Middleware\FilamentAccessMiddleware;
+use App\Http\Middleware\TrackInactivity;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
@@ -49,6 +50,7 @@ class AppPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
+                TrackInactivity::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
@@ -56,7 +58,7 @@ class AppPanelProvider extends PanelProvider
                 FilamentAccessMiddleware::class,
             ])
             ->navigationGroups([
-                NavigationGroup::make('Web Services'),
+                NavigationGroup::make('Technology'),
             ])
             ->navigationItems([
                 NavigationItem::make('Legacy Admin Panel')
@@ -64,12 +66,12 @@ class AppPanelProvider extends PanelProvider
                     ->icon('heroicon-o-clock')
                     ->visible(fn () => request()->user()->hasPermissionTo('adm')),
                 NavigationItem::make('Horizon')
-                    ->group('Web Services')
+                    ->group('Technology')
                     ->icon('heroicon-o-bars-arrow-down')
                     ->url(fn () => route('horizon.index'))
                     ->visible(fn () => request()->user()->can('viewHorizon')),
                 NavigationItem::make('Telescope')
-                    ->group('Web Services')
+                    ->group('Technology')
                     ->icon('heroicon-o-magnifying-glass')
                     ->url(fn () => route('telescope'))
                     ->visible(fn () => request()->user()->can('viewTelescope')),

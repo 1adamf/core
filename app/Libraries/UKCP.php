@@ -78,7 +78,7 @@ class UKCP
     }
 
     /**
-     * @param $token object|string A token object or token ID string
+     * @param  $token  object|string A token object or token ID string
      * @return false|string
      */
     public static function getKeyForToken($token)
@@ -87,8 +87,8 @@ class UKCP
     }
 
     /**
-     * @param $tokenID string The full length token ID
-     * @param $account Account
+     * @param  $tokenID  string The full length token ID
+     * @param  $account  Account
      * @return string
      */
     public static function getPathForToken($tokenID, $account)
@@ -116,6 +116,43 @@ class UKCP
                 })['stands'];
         } catch (ClientException $e) {
             Log::warning("UKCP Client Error {$e->getMessage()} when getting stand status for {$airfield}");
+
+            return [];
+        }
+    }
+
+    public function getUnreadNotificationsForUser(Account $account)
+    {
+        try {
+            $url = config('services.ukcp.url')."/api/user/{$account->id}/notifications/unread";
+            $result = $this->client->get($url, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$this->apiKey,
+                ],
+            ]);
+
+            return json_decode($result->getBody()->getContents(), true);
+        } catch (ClientException $e) {
+            Log::info("UKCP Client Exception {$e->getMessage()} when getting notifications");
+
+            return [];
+        }
+    }
+
+    public function markNotificationReadForUser(Account $account, int $notificationId)
+    {
+        try {
+            $url = config('services.ukcp.url')."/api/user/{$account->id}/notifications/read/{$notificationId}";
+            $this->client->put($url, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$this->apiKey,
+                ],
+            ]);
+
+            return true;
+        } catch (ClientException $e) {
+            dd($e);
+            Log::info("UKCP Client Exception {$e->getMessage()} when marking notification read");
 
             return [];
         }

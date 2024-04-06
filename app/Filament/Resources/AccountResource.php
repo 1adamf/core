@@ -7,10 +7,10 @@ use App\Filament\Helpers\Resources\DefinesGatedAttributes;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers;
 use App\Models\Mship\Account;
+use App\Models\Roster;
 use AxonC\FilamentCopyablePlaceholder\Forms\Components\CopyablePlaceholder;
 use Carbon\CarbonInterface;
 use Filament\Forms;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -30,7 +30,7 @@ class AccountResource extends Resource implements DefinesGatedAttributes
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['id', 'name_first', 'name_last', 'nickname'];
+        return ['id', 'name_first', 'name_last', 'nickname', 'discord_id'];
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array
@@ -76,6 +76,7 @@ class AccountResource extends Resource implements DefinesGatedAttributes
 
                     Forms\Components\Placeholder::make('has_secondary_password')->content(fn ($record) => $record->hasPassword() ? 'Yes' : 'No'),
                     Forms\Components\Placeholder::make('discord_id')->label('Discord ID')->content(fn ($record) => $record->discord_id ?? new HtmlString('<i>Not Linked</i>')),
+                    Forms\Components\Placeholder::make('roster_status')->label('Roster Status')->content(fn ($record) => Roster::where('account_id', $record->id)->exists() ? 'Active' : 'Inactive'),
 
                     Forms\Components\Fieldset::make('Emails')->schema([
                         Forms\Components\TextInput::make('email')
@@ -117,7 +118,11 @@ class AccountResource extends Resource implements DefinesGatedAttributes
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('CID'),
+                Tables\Columns\TextColumn::make('discord_id')
+                    ->searchable()
+                    ->label('Discord ID')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(['name_first', 'name_last']),
                 Tables\Columns\TextColumn::make('qualification_atc')->sortable()->label('ATC Rating'),
                 Tables\Columns\TextColumn::make('qualification_pilot')->sortable()->label('Pilot Rating'),
@@ -147,6 +152,8 @@ class AccountResource extends Resource implements DefinesGatedAttributes
             RelationManagers\FeedbackRelationManager::class,
             RelationManagers\RolesRelationManager::class,
             RelationManagers\BansRelationManager::class,
+            RelationManagers\NotesRelationManager::class,
+            RelationManagers\EndorsementsRelationManager::class,
         ];
     }
 

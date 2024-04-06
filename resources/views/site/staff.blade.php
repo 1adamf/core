@@ -39,8 +39,8 @@
 
                     <div class="col-md-12">
                         <h4 class="text-center">Division Director (VATUK1)</h4><br />
-                        <img src="{{ $teamPhotos[54] }}" width=50px class="img-responsive center-block profile-picture" />
-                        <p class="text-center">Chris Pawley</p>
+                        <img src="{{ $teamPhotos[7103] }}" width=50px class="img-responsive center-block profile-picture" />
+                        <p class="text-center">Ben Wright</p>
                     </div>
                 </div>
             </div>
@@ -64,11 +64,11 @@
                     <table class="table">
                         <tr>
                             <td>Enroute Operations Coordinator</td>
-                            <td>1237658</td>
+                            <td><em>Vacant</em></td>
                         </tr>
                         <tr>
                             <td>Aerodrome Operations Coordinator</td>
-                            <td>Adam Arkley</td>
+                            <td>Archie Middlefell</td>
                         </tr>
                         <tr>
                             <td>Aerodrome Operations Coordinator</td>
@@ -84,7 +84,15 @@
                         </tr>
                         <tr>
                             <td>Operations Assistant</td>
+                            <td>Alice Ford</td>
+                        </tr>
+                        <tr>
+                            <td>Operations Assistant</td>
                             <td>Chad Byworth</td>
+                        </tr>
+                        <tr>
+                            <td>Operations Assistant</td>
+                            <td>1237658</td>
                         </tr>
                     </table>
                 </div>
@@ -98,13 +106,13 @@
                 </div>
                 <div class="panel-body">
                     <h4 class="text-center">Marketing Director (VATUK4)</h4><br />
-                    <img src="{{ $teamPhotos[6738] }}" width=50px class="img-responsive center-block profile-picture" />
-                    <p class="text-center">Loui Ringer</p>
+                    <img src="{{ $teamPhotos[1] }}" width=50px class="img-responsive center-block profile-picture" />
+                    <p class="text-center"><em>Vacant</em></p>
                     <h4 class="text-center">Marketing Team</h4>
                     <table class="table">
                         <tr>
                             <td>Marketing General Manager</td>
-                            <td>Ben Wright</td>
+                            <td><em>Vacant</em></td>
                         </tr>
                         <tr>
                             <td>Events Manager</td>
@@ -153,10 +161,6 @@
                             <td>Developer</td>
                             <td>Dave Etheridge</td>
                         </tr>
-                        <tr>
-                            <td>Developer</td>
-                            <td>Kevin Gunn</td>
-                        </tr>
                     </table>
                 </div>
             </div>
@@ -176,8 +180,8 @@
                 </div>
                 <div class="panel-body">
                     <h4 class="text-center">Member Services Director (VATUK3)</h4><br />
-                    <img src="{{ $teamPhotos[5660] }}" width=50px class="img-responsive center-block profile-picture" />
-                    <p class="text-center">John Batten</p>
+                    <img src="{{ $teamPhotos[7358] }}" width=50px class="img-responsive center-block profile-picture" />
+                    <p class="text-center">William Shaw</p>
                     <h4 class="text-center">Member Services Team</h4>
                     <table class="table">
                         <tr>
@@ -187,10 +191,6 @@
                         <tr>
                             <td>Member Services Assistant</td>
                             <td>William Brushfield</td>
-                        </tr>
-						<tr>
-                            <td>Member Services Assistant</td>
-                            <td>William Shaw</td>
                         </tr>
                     </table>
                 </div>
@@ -221,13 +221,14 @@
                 <div class="panel-body">
                     <div class="col-md-6">
                         <h4 class="text-center">ATC Training Director (VATUK5)</h4><br />
-                        <img src="{{ $teamPhotos[6887] }}" width=50px class="img-responsive center-block profile-picture" />
-                        <p class="text-center">Adam Farquharson</p>
+                        <img src="{{ $teamPhotos[2308] }}" width=50px class="img-responsive center-block profile-picture" />
+                        <p class="text-center">Adam Arkley</p>
                         <h4 class="text-center">ATC Training Team</h4>
                         <table class="table">
                             <tr>
-                                <td>ATC Training Manager</td>
-                                <td><em>Vacant</em></td>
+                                <td>ATC Training Manager & <br />
+                                Division Instructor</td>
+                                <td>Will Jennings</td>
                             </tr>
                             <tr>
                                 <td>Training Department Assistant</td>
@@ -235,11 +236,15 @@
                             </tr>
                             <tr>
                                 <td>Division Instructor</td>
-                                <td>Jack Edwards</td>
+                                <td>Adam Arkley</td>
                             </tr>
                             <tr>
                                 <td>Division Instructor</td>
                                 <td>Chris Pawley</td>
+                            </tr>
+                            <tr>
+                                <td>Division Instructor</td>
+                                <td>Fraser Cooper</td>
                             </tr>
                             <tr>
                                 <td>Division Instructor</td>
@@ -248,10 +253,6 @@
                             <tr>
                                 <td>Division Instructor</td>
                                 <td>Mike Pike</td>
-                            </tr>
-                            <tr>
-                                <td>Division Instructor</td>
-                                <td>Lee Roberts</td>
                             </tr>
                             <tr>
                                 <td>Division Instructor</td>
@@ -270,10 +271,6 @@
                                 <td>Stephen Lee</td>
                             </tr>
                             <tr>
-                                <td>TG Instructor (TWR)</td>
-                                <td>Daniel Blanco</td>
-                            </tr>
-                            <tr>
                                 <td>Lead Mentor (TWR)</td>
                                 <td>Will Hinshaw</td>
                             </tr>
@@ -282,12 +279,8 @@
                                 <td>Samuel Lefevre</td>
                             </tr>
                             <tr>
-                                <td>TG Instructor (APP)</td>
-                                <td>William Jennings</td>
-                            </tr>
-                            <tr>
-                                <td>TG Instructor (ENR)</td>
-                                <td>1237658</td>
+                                <td>Lead Mentor (ENR)</td>
+                                <td>Dave Woodward</td>
                             </tr>
                             <tr>
                                 <td>TG Instructor (Heathrow)</td>
@@ -308,11 +301,11 @@
                             </tr>
                             <tr>
                                 <td>Initial Flight Instructor</td>
-                                <td><em>Cole Edwards</em></td>
+                                <td>Cole Edwards</td>
                             </tr>
                             <tr>
                                 <td>VFR Flight Instructor</td>
-                                <td><em>Benjamin Arrowsmith</em></td>
+                                <td>Benjamin Arrowsmith</td>
                             </tr>
                             <tr>
                                 <td>IFR Flight Instructor</td>

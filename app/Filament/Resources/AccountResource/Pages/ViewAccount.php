@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\AccountResource\Pages;
 
 use App\Filament\Helpers\Pages\BaseViewRecordPage;
+use App\Filament\Helpers\Pages\LogPageAccess;
 use App\Filament\Resources\AccountResource;
 use App\Jobs\UpdateMember;
 use App\Models\Contact;
+use App\Models\Roster;
 use App\Notifications\Mship\UserImpersonated;
 use Filament\Actions;
 use Filament\Actions\ActionGroup;
@@ -18,10 +20,19 @@ use Illuminate\Support\HtmlString;
 
 class ViewAccount extends BaseViewRecordPage
 {
+    use LogPageAccess;
+
     protected static string $resource = AccountResource::class;
+
+    protected function getLogActionName(): string
+    {
+        return 'ViewAccount';
+    }
 
     protected function getHeaderActions(): array
     {
+        $onRoster = Roster::where('account_id', $this->record->id)->exists();
+
         return [
 
             Actions\Action::make('request_central_update')
@@ -35,6 +46,23 @@ class ViewAccount extends BaseViewRecordPage
 
             ActionGroup::make([
                 $this->getImpersonateAction(),
+                Actions\Action::make('toggle_roster_status')
+                    ->visible(fn () => auth()->user()->can('roster.manage'))
+                    ->color($onRoster ? 'danger' : 'success')
+                    ->icon('heroicon-o-key')
+                    ->name($onRoster ? 'Remove from roster' : 'Add to roster')
+                    ->modalHeading($onRoster ? 'Remove from roster' : 'Add to roster')
+                    ->action(function () use ($onRoster) {
+                        Roster::withoutGlobalScopes()->where('account_id', $this->record->id)->delete();
+
+                        if (! $onRoster) {
+                            Roster::create(['account_id' => $this->record->id]);
+                        }
+
+                        $this->refreshFormData(['roster_status']);
+                    })
+                    ->requiresConfirmation()
+                    ->successNotificationTitle('Roster status updated!'),
                 Actions\Action::make('remove_password')
                     ->visible(fn () => $this->record->hasPassword() && auth()->user()->can('removeSecondaryPassword', $this->record))
                     ->color('warning')

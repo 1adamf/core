@@ -68,7 +68,7 @@
     <script src="https://slug.vatsim.uk/script.js" data-site="HQWHPBQX" data-included-domains="vatsim.uk,www.vatsim.uk" defer></script>
 
     <!-- Styles -->
-    <link media="all" type="text/css" rel="stylesheet" href="{{ mix('css/home.css') }}">
+    @vite('resources/assets/sass/home.scss')
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
           integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
@@ -139,6 +139,9 @@
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('site.atc.newController') }}">Become a Controller</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('site.roster.index') }}">Controller Roster</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://cts.vatsim.uk/home/solo.php">Solo Endorsements</a>
@@ -355,7 +358,7 @@
         </p>
         <br>
 
-        <p class="text-right text-light">Chris Pawley <br/> VATSIM UK Division Director</p>
+        <p class="text-right text-light">Ben Wright <br/> VATSIM UK Division Director</p>
 
     <!-- UK Welcome [END] -->
 
@@ -432,8 +435,8 @@
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/1.10.3/jarallax.min.js" integrity="sha512-1RIeczLHpQNM864FPmyjgIOPQmljv9ixHg5J1knRhTApLpvxqA0vOTxgGF89/DpgZIAXRCn9dRiakPjyTUl9Rg==" crossorigin="anonymous"></script>
-<script src="{{ mix('js/home.js') }}"></script>
-<script src="{{ mix('js/top-notification.js') }}"></script>
+@vite('resources/assets/js/home.js')
+@vite('resources/assets/js/top-notification.js')
 
 <script src="https://unpkg.com/jarallax@1.10/dist/jarallax.min.js"></script>
 <script src="https://unpkg.com/jarallax@1.10/dist/jarallax-video.min.js"></script>
