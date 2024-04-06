@@ -22,3 +22,20 @@ _ide_helper.php
 /build
 
 .gitmodules
+composer.lock
+composer.lock
+composer.lock
+package-lock.json
+public/vendor/horizon/app-dark.css
+public/vendor/horizon/app.css
+public/vendor/horizon/app.js
+yarn.lock
+public/vendor/telescope/app.js
+public/vendor/telescope/app.css
+public/vendor/telescope/app-dark.css
+public/vendor/horizon/img/sprite.svg
+public/vendor/horizon/img/horizon.svg
+public/vendor/horizon/app.js
+public/vendor/horizon/app.css
+public/vendor/horizon/app-dark.css
+package-lock.json
